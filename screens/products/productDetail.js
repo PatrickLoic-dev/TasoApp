@@ -37,7 +37,7 @@ export default function ProductDetailScreen({route, navigation}) {
             </View>
             <View>
               <Text style = {{fontSize : 32, fontWeight : 'bold'}}>Stock</Text>
-              <Text style = {{fontSize : 24, fontWeight : 'bold', color : '#009090'}}>{product.quantity}</Text>
+              <Text style = {{fontSize : 24, fontWeight : 'bold', color : '#009090'}}>{product.stockQuantity}</Text>
             </View>
             <View>
               <Text style = {{fontSize : 32, color : '#000', fontWeight : 'bold'}}>Price</Text>

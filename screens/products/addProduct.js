@@ -76,7 +76,7 @@ export default function AddProductScreen({navigation}) {
       unitPrice : unitPrice,
       description : description,
       category : category._id,
-      quantity : stock,
+      stockQuantity : stock,
     })
       .then((result) => {
         if (result && result.status == 200) {
@@ -308,4 +308,5 @@ const styles = StyleSheet.create({
     padding : 10,
     borderRadius : 8,
   },
+
 })

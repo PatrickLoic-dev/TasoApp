@@ -8,7 +8,7 @@ const itemCard = ({item, navigation}) => {
                 <View style = {{marginLeft : 16}}>
                     <Text style = {{fontSize : 32, fontWeight : 'bold'}}>{item.name}</Text>
                     <Text style = {{fontSize : 24, color : '#009090'}}>{item.category.name}</Text>
-                    <Text style = {{fontSize : 24, color : '#009090'}}>Stock : {item.quantity}</Text>
+                    <Text style = {{fontSize : 24, color : '#009090'}}>Stock : {item.stockQuantity}</Text>
                     <Text style = {{fontSize : 24, color : '#000'}}>Price : {item.unitPrice} FCFA</Text>
                 </View>
             </TouchableOpacity>

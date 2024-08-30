@@ -5,6 +5,7 @@ import { getProducts } from '../../api/productApi';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useSelector,useDispatch } from 'react-redux/dist/react-redux';
 import { addToCart } from '../../redux/cartReducer';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 
 export default function CreateOrderScreen({navigation}) {
@@ -18,6 +19,15 @@ export default function CreateOrderScreen({navigation}) {
   const addItemToCart = (item) => {
     dispatch(addToCart(item));
   }
+
+    const areItemsPresent = () => {
+      let itemsPresent = false;
+      if (cart.length >= 1) {
+          itemsPresent = true;
+      }
+      return itemsPresent 
+  }
+
 
   useEffect(() => {
       // Fetch all products initially
@@ -62,16 +72,16 @@ export default function CreateOrderScreen({navigation}) {
               <View style = {styles.productCard}>
                   <Image source={{uri : item.productPhoto}} style = {styles.image}/>
                   <View style = {{marginLeft : 16, flexDirection : 'row'}}>
-                      <View>
-                      <Text style = {{fontSize : 32, fontWeight : 'bold'}}>{item.name}</Text>
-                      <Text style = {{fontSize : 24, color : '#009090'}}>{item.category.name}</Text>
+                      <View style ={{overflow : 'hidden', width : 200}}>
+                      <Text style = {{flexWrap : 'wrap',flex : 1, fontSize : 32, fontWeight : 'bold'}}>{item.name}</Text>
+                      <Text style = {{fontSize : 16, color : '#009090'}}>{item.category.name}</Text>
                       </View>
                       <View>
-                      <Text style = {{fontSize : 24, color : '#009090'}}>Stock : {item.quantity}</Text>
+                      <Text style = {{fontSize : 24, color : '#009090'}}>Stock : {item.stockQuantity}</Text>
                       <Text style = {{fontSize : 24, color : '#000'}}>Price : {item.unitPrice} FCFA</Text>
                       </View>
                       <TouchableOpacity style = {styles.detailBtn} onPress = {() => {addItemToCart(item)}}>
-                        <MaterialIcons name="add-shopping-cart" size={24} color="black" />
+                        <MaterialIcons name="add-shopping-cart" size={32} color="#FFF" />
                       </TouchableOpacity>
                   </View>
               </View>
@@ -84,8 +94,9 @@ export default function CreateOrderScreen({navigation}) {
       <SafeAreaView style={styles.container}>
           <View style = {styles.header}>
               <Text style = {styles.head}>Products</Text>
-              <TouchableOpacity style = {styles.profileBtn}>
-              <Image source={userIcon} style = {styles.icon}></Image>
+              <TouchableOpacity style = {styles.profileBtn} onPress = {()=> navigation.navigate('Cart')}>
+               <MaterialCommunityIcons name="cart-outline" size={44} color="black" />
+               {areItemsPresent() && <View style={{ height: 30, width: 30, backgroundColor: '#FE5300', borderRadius: 24, position: 'absolute', top: 2, right: 4, alignItems : 'center', justifyContent : 'center' }}><Text style = {{fontSize : 24, color : '#FFF'}}>{cart.length}</Text></View>}
               </TouchableOpacity>
           </View>
           <View>
@@ -111,12 +122,6 @@ export default function CreateOrderScreen({navigation}) {
                   renderItem={itemCard}
                   style = {styles.view}
               />
-         
-          <TouchableOpacity 
-              style = {styles.addBtn}
-              onPress = {() => navigation.navigate('AddProduct')}>
-                  <Image source={addIcon} style = {styles.addIcon}></Image>
-          </TouchableOpacity>
       </SafeAreaView>
   )
 }
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
       marginRight: 20,
   },
   profileBtn : {
-      backgroundColor: '#009090',
+
       padding: 15,
       height: 70,
       width: 70,
@@ -203,9 +208,10 @@ const styles = StyleSheet.create({
       padding : 8,
       borderRadius : 16,
       flexDirection : 'row',
-      width : 200,    
+      width : 80,    
       alignItems : 'center',
-      justifyContent : 'space-between',
+      justifyContent : 'center',
+      marginLeft : 24,
   },
   productCard : {
       backgroundColor: '#FFF',

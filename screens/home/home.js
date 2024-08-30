@@ -42,7 +42,7 @@ export default function HomeScreen({navigation}) {
             </View>
 
             <View>
-                <Text style = {styles.sectionHead}>Actions</Text>
+                <Text style = {[styles.sectionHead, {marginTop: 32}]}>Actions</Text>
                 
                 <View style = {styles.cardSection}>
                   <ActionButton number = {741} info = "Add an order"/>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
           height: 40
       },
       cardSection : {
-          marginTop: 40,
+          marginTop: 24,
           flexWrap : 'wrap',
           flexDirection : 'row',
           alignItems : 'center',
