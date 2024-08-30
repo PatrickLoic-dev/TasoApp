@@ -17,6 +17,14 @@ export default function CartScreen({navigation}) {
         dispatch(incrementQuantity(item));
     }
 
+    const decrementQuantity = (item) => {
+       if(item.quantity == 1){
+        dispatch(removeItem(item._id));
+       }else{
+        dispatch(decrementQuantity(item));
+       }
+    }
+
     const totalPrice = () => {
         let total = 0;
         products.forEach(item => {
@@ -39,8 +47,8 @@ export default function CartScreen({navigation}) {
                         <View>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginVertical : 10, }}>
                                 <TouchableOpacity onPress={() => increaseQuantity(item)} style = {styles.countBtn}><AntDesign name="minus" size={40} color="black" /></TouchableOpacity>
-                                <TextInput style={styles.number}>{stock}</TextInput>
-                                <TouchableOpacity onPress={() => {setStock(stock + 1), console.log(stock)}} style = {styles.countBtn}><Ionicons name="add-outline" size={40} color="black" /></TouchableOpacity>
+                                <TextInput style={styles.number}>{item.quantity}</TextInput>
+                                <TouchableOpacity onPress={() => decrementQuantity} style = {styles.countBtn}><Ionicons name="add-outline" size={40} color="black" /></TouchableOpacity>
                             </View>
                             <TouchableOpacity style = {styles.detailBtn} onPress = {() => {addItemToCart(item)}}>
                                 <MaterialIcons name="add-shopping-cart" size={32} color="#FFF" />
