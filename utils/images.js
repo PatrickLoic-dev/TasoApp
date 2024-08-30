@@ -1,0 +1,1 @@
+export const tasoLogo = require("../assets/images/tasoLogo.png");
